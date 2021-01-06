@@ -1,9 +1,9 @@
 class Fighter extends Character {
-    constructor(hp = 12, dmg = 4, mana = 40) {
-        super(hp, dmg, mana);
+    constructor(name = "Grace", hp = 12, dmg = 4, mana = 40) {
+        super(name, hp, dmg, mana, status);
     }
 
-    darkVision = () => {
+    darkVision() {
         this.dmg = 5;
         this.mana -= 20;
         // reduit dmg recue de 2 pendant 1 tour

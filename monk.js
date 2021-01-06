@@ -1,9 +1,9 @@
 class Monk extends Character {
-    constructor(hp = 8, dmg = 2, mana = 200) {
-        super(hp, dmg, mana);
+    constructor(name = "Moana", hp = 8, dmg = 2, mana = 200) {
+        super(name, hp, dmg, mana, status);
     }
 
-    heal = () => {
+    heal() {
         this.hp += 8;
         this.mana -= 25;
     }
