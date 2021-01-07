@@ -9,14 +9,20 @@ class Fighter extends Character {
         let dmgReceived = 5;
         if (victim.protect === true) {
             dmgReceived -= 2
+        } else if (victim.markOfCain === true) {
+            dmgReceived -= 0
         }
         victim.hp -= dmgReceived;
         this.mana -= 20;
         this.protect = true
-            // reduit dmg recue de 2 pendant 1 tour
+        console.log("");
         console.log(`========== Special of ${this.name} ==========`);
         console.log("");
         console.log(`${this.name} receives +20mana`);
         console.log(`${this.name} is attacking ${victim.name}. He deals him ${dmgReceived} damages`)
+        if (victim.hp <= 0) {
+            victim.status = "loser";
+            console.log(`++++++++++ ${victim.name} is dead !! ++++++++++`);
+        }
     }
 }

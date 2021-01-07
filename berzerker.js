@@ -7,6 +7,7 @@ class Berzerker extends Character {
     special = () => {
         this.dmg += 1;
         this.hp -= 1;
+        console.log("");
         console.log(`========== Special of ${this.name} ==========`);
         console.log("");
         console.log(`${this.name} receives +1DMG and -1HP`);

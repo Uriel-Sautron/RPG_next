@@ -9,11 +9,14 @@ class Character {
     }
 
     takeDamage = enemy => {
+        let dmgReceived = enemy.dmg
         if (this.protect === true) {
             dmgReceived -= 2
+        } else if (enemy.markOfCain === true) {
+            dmgReceived -= 0
         }
-        console.log(`${enemy.name} is attacking ${this.name}. He deals him ${enemy.dmg} damages`);
-        this.hp -= enemy.dmg;
+        console.log(`${enemy.name} is attacking ${this.name}. He deals him ${dmgReceived} damages`);
+        this.hp -= dmgReceived;
         if (this.hp <= 0) {
             this.status = "loser";
             console.log(`++++++++++ ${this.name} is dead !! ++++++++++`);
@@ -24,6 +27,7 @@ class Character {
         victim.takeDamage(this)
         if (victim.status === "loser") {
             this.mana += 20;
+            console.log(`${this.name} receives +20mana`)
         }
     }
 }

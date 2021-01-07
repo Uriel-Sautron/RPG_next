@@ -13,6 +13,7 @@ class Turn {
                 let actionFigth = true
                 do {
                     actionFigth = true
+                    console.log("");
                     console.log("########## Action ##########")
                     console.log("");
                     console.log("1 - Fight")
@@ -28,6 +29,7 @@ class Turn {
                             break;
 
                         case "2":
+                            console.log("");
                             console.log("########## Enemies Stats ##########")
                             console.log("");
                             this.game.watchStats(player, this.characters);
@@ -35,10 +37,11 @@ class Turn {
                             break;
 
                         case "3":
+                            console.log("");
                             console.log("########## My Stats ##########")
                             console.log("");
-                            console.log(this.game);
                             this.game.myStats(player);
+                            actionFigth = false;
                             break;
 
 
@@ -46,10 +49,12 @@ class Turn {
                             if (player.constructor.name === "Berzerker" || player.constructor.name === "Monk") {
                                 player.specialActiveted = true;
                                 player.special();
+                                player.specialActiveted = false;
                                 break;
                             } else {
                                 player.specialActiveted = true;
                                 this.oneTurn(player, this.characters);
+                                player.specialActiveted = false;
                                 break;
                             }
 
@@ -71,6 +76,7 @@ class Turn {
     }
 
     oneTurn = (player, characters) => {
+        console.log("");
         console.log("########## Choose your victim ##########")
         let victims = characters.filter(char => char !== player && char.status !== "loser")
         victims.forEach(victim => console.log(`${victims.indexOf(victim) + 1} - ${victim.name}`))

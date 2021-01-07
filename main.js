@@ -12,8 +12,9 @@ startGame = () => {
     const characters = game.initializeCharacter();
     let i = 0;
     while (i < game.turn && game.status !== "finish") {
-        const charactersAlive = game.checkAlive(characters)
+        const charactersAlive = game.checkAlive(characters);
         game.resetCharacter(charactersAlive);
+        game.checkAssassinMark(charactersAlive);
         game.newTurn();
         game.turnLeft(i);
         const orderChar = shuffleArray(charactersAlive);

@@ -7,6 +7,7 @@ class Monk extends Character {
     special = () => {
         this.hp += 8;
         this.mana -= 25;
+        console.log("");
         console.log(`========== Special of ${this.name} ==========`);
         console.log("");
         console.log(`${this.name} receives +8HP and -25Mana`);

@@ -19,7 +19,6 @@ class Game {
         console.log(`********** Round ${i + 1} **********`);
         console.log(`Remaining Turn: ${this.turn}`);
         console.log("");
-        console.log("");
     }
 
     newTurn = () => {
@@ -52,6 +51,14 @@ class Game {
     watchStats = (player, allCharacters) => {
         const victims = allCharacters.filter(char => char !== player && char.status !== "loser")
         victims.forEach(victim => console.log(`${victims.indexOf(victim) + 1} - ${victim.name}: ${victim.constructor.name} - ${victim.hp}HP - ${victim.mana}Mana - ${victim.dmg}DMG`))
+    }
+
+    checkAssassinMark = array => {
+        const mark = array.filter(char => char.assassinMark !== false && char.assassinMark !== undefined)[0];
+        console.log(mark)
+        if (mark !== undefined) {
+            mark.shadowHit(mark.assassinMark)
+        }
     }
 
 }
