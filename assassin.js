@@ -27,7 +27,7 @@ class Assassin extends Character {
             }
 
             victim.hp -= dmgReceived;
-            this.markOfCain = true;
+
             console.log(`========== In the shadows ${this.name} attack ==========`);
             console.log("");
             console.log(`${this.name} is attacking ${victim.name}. He deals him ${dmgReceived} damages`)
@@ -41,6 +41,7 @@ class Assassin extends Character {
                     console.log(`++++++++++ ${this.name} is dead !! ++++++++++`);
                 }
             }
+            this.markOfCain = true;
         } else {
             this.markOfCain = true;
             console.log(`${this.name} is the Mark of Cain`)

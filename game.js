@@ -55,7 +55,6 @@ class Game {
 
     checkAssassinMark = array => {
         const mark = array.filter(char => char.assassinMark !== false && char.assassinMark !== undefined)[0];
-        console.log(mark)
         if (mark !== undefined) {
             mark.shadowHit(mark.assassinMark)
         }
