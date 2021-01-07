@@ -1,7 +1,8 @@
 class Turn {
 
-    constructor(characters) {
+    constructor(characters, game) {
         this.characters = characters
+        this.game = game
         this.startTurn()
     }
 
@@ -13,9 +14,11 @@ class Turn {
                 do {
                     actionFigth = true
                     console.log("########## Action ##########")
+                    console.log("");
                     console.log("1 - Fight")
-                    console.log("2 - Enemies Status")
-                    console.log(`3 - ${player.specialAttack}`)
+                    console.log("2 - Enemies Stats")
+                    console.log("3 - My Stats")
+                    console.log(`4 - ${player.specialAttack}`)
                     console.log("* - Kill You")
                     let playerAction = prompt(`${player.name}, choose your action`)
                     switch (playerAction) {
@@ -25,10 +28,30 @@ class Turn {
                             break;
 
                         case "2":
-                            console.log("########## Enemies Info ##########")
-                            this.enemyStatus(player, this.characters);
+                            console.log("########## Enemies Stats ##########")
+                            console.log("");
+                            this.game.watchStats(player, this.characters);
                             actionFigth = false;
                             break;
+
+                        case "3":
+                            console.log("########## My Stats ##########")
+                            console.log("");
+                            console.log(this.game);
+                            this.game.myStats(player);
+                            break;
+
+
+                        case "4":
+                            if (player.constructor.name === "Berzerker" || player.constructor.name === "Monk") {
+                                player.specialActiveted = true;
+                                player.special();
+                                break;
+                            } else {
+                                player.specialActiveted = true;
+                                this.oneTurn(player, this.characters);
+                                break;
+                            }
 
                         case "*":
                             player.status = "loser"
@@ -47,14 +70,9 @@ class Turn {
         console.clear();
     }
 
-    enemyStatus = (player, allCharacters) => {
-        const victims = allCharacters.filter(char => char !== player)
-        victims.forEach(victim => console.log(`${victims.indexOf(victim) + 1} - ${victim.name}: ${victim.constructor.name} - ${victim.hp}HP - ${victim.mana}Mana - ${victim.dmg}DMG`))
-    }
-
     oneTurn = (player, characters) => {
         console.log("########## Choose your victim ##########")
-        let victims = characters.filter(char => char !== player)
+        let victims = characters.filter(char => char !== player && char.status !== "loser")
         victims.forEach(victim => console.log(`${victims.indexOf(victim) + 1} - ${victim.name}`))
         let isValid = true
         do {
@@ -67,6 +85,8 @@ class Turn {
             } else if (victim.status === 'loser') {
                 console.log(`Sorry, ${victim.name} is already dead, choose another victim`);
                 isValid = false
+            } else if (player.specialActiveted === true) {
+                player.special(victim)
             } else {
                 player.dealDamage(victim)
             }

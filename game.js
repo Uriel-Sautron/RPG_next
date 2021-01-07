@@ -18,6 +18,8 @@ class Game {
     turnLeft = (i) => {
         console.log(`********** Round ${i + 1} **********`);
         console.log(`Remaining Turn: ${this.turn}`);
+        console.log("");
+        console.log("");
     }
 
     newTurn = () => {
@@ -28,14 +30,28 @@ class Game {
         if (this.turn === 0 || array.length <= 1) {
             this.status = "finish";
             console.log("Game Over");
-            const survivors = this.checkAlive(array)
+            let survivors = this.checkAlive(array)
             console.log("########## Survivors ##########")
-            console.log(survivors.forEach(char => char.name))
+            console.log("");
+            survivors.forEach(char => console.log(char.name))
         }
     }
 
     checkAlive = checkCharacters => {
         return checkCharacters.filter(char => char.status !== "loser");
+    }
+
+    resetCharacter = array => {
+        return array.map(char => char.protect = false)
+    }
+
+    myStats = player => {
+        console.log(`${player.name}: ${player.constructor.name} - ${player.hp}HP - ${player.mana}Mana - ${player.dmg}DMG - ${player.specialAttack}`)
+    }
+
+    watchStats = (player, allCharacters) => {
+        const victims = allCharacters.filter(char => char !== player && char.status !== "loser")
+        victims.forEach(victim => console.log(`${victims.indexOf(victim) + 1} - ${victim.name}: ${victim.constructor.name} - ${victim.hp}HP - ${victim.mana}Mana - ${victim.dmg}DMG`))
     }
 
 }
